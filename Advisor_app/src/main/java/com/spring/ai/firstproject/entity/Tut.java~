@@ -1,0 +1,16 @@
+package com.spring.ai.firstproject.entity;
+
+public class Tut {
+    private String title;
+    private String content;
+    private  String createdYear;
+
+    public Tut(String title, String content, String createdYear) {
+        this.title = title;
+        this.content = content;
+        this.createdYear = createdYear;
+    }
+
+    public Tut() {
+    }
+}

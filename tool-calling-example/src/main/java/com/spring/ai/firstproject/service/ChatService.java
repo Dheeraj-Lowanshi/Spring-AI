@@ -1,0 +1,33 @@
+package com.spring.ai.firstproject.service;
+
+ import com.spring.ai.firstproject.tools.SimpleDateTimeTool;
+ import com.spring.ai.firstproject.tools.WeatherTool;
+ import org.springframework.ai.chat.client.ChatClient;
+ import org.springframework.beans.factory.annotation.Value;
+ import org.springframework.stereotype.Service;
+
+@Service
+public class ChatService {
+
+    private ChatClient chatClient;
+
+    private WeatherTool weatherTool;
+
+
+    public ChatService(ChatClient chatClient, WeatherTool weatherTool) {
+        this.chatClient = chatClient;
+        this.weatherTool= weatherTool;
+    }
+
+    //chat method:: get response from llm modal
+    //chatClint:: clint from calling ll modal
+    //tool description:: chatbot for tool calling
+    public String chat(String q) {
+        return chatClient
+                .prompt()
+                .tools(new SimpleDateTimeTool(), weatherTool)
+                .user(q)
+                .call()
+                .content();
+    }
+}

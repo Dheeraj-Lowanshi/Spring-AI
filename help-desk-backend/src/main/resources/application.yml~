@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: help-desk-backend
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring_ai_yt?useSSL=false&serverTimezone=UTC
+    username: root
+    password: abcd
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update   # use 'validate' in production
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o-mini
+        chat:
+          memory:
+            repository:
+          jdbc:
+        initialize-schema: always
+
+server:
+  port: 8081
+
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.springframework.ai.chat.client.advisor: DEBUG
+
+#database configuration
